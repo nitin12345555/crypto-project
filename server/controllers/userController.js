@@ -2,7 +2,6 @@ import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-
 // Helper function to generate a JWT token
 const generateToken = (userId) => {
     // The secret key is loaded from the .env file
