@@ -1,0 +1,379 @@
+body {
+    background-color: #050b1a;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1000;
+}
+
+.Logo {
+    width: 200px;
+    height: auto;
+    mix-blend-mode: screen; 
+    opacity: 0.85;
+    filter: brightness(1.2) contrast(1.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    justify-content: center;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.nav-ul li a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.nav-ul li a:hover {
+    color: lightgreen;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: center;
+    color: lightgreen;
+}
+
+.login-button,
+.sign-button,
+.logout-button {
+    border-radius: 5px;
+    padding: 10px 15px;
+    min-width: 100px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 1px solid lightgreen;
+    box-sizing: border-box;
+}
+
+.login-button {
+    background-color: #050b1a;
+    color: lightgreen;
+}
+
+.login-button:hover {
+    background-color: lightgreen;
+    color: black;
+}
+
+.sign-button,
+.logout-button {
+    background-color: lightgreen;
+    color: black;
+}
+
+.sign-button:hover,
+.logout-button:hover {
+    background-color: #050b1a;
+    color: lightgreen;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.user-icon {
+    font-size: 20px;
+    color: white;
+}
+
+.user-name {
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+}
+
+.user-name:hover {
+    color: lightgreen;
+}
+
+.buyandlive {
+    font-size: 18px;
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    z-index: 1100;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger-menu.open span:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.hamburger-menu.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.open span:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
+.mobile-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #050b1a;
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    padding: 50px 20px;
+    box-sizing: border-box;
+}
+
+.mobile-menu.open {
+    transform: translateX(0);
+}
+
+.mobile-menu .nav-ul,
+.mobile-menu .nav-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    font-size: 24px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.mobile-menu .nav-ul li a {
+    font-size: 1.5rem;
+    padding: 10px 0;
+}
+
+.mobile-menu .login-button,
+.mobile-menu .sign-button,
+.mobile-menu .logout-button {
+    width: 180px;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+}
+
+.mobile-menu .user-info {
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.mobile-menu .user-icon {
+    font-size: 28px;
+}
+
+.mobile-menu .user-name {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.work-section-wrapper,
+.support-section-wrapper,
+.pricing-section-wrapper {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-container {
+        padding: 15px 20px;
+    }
+
+    .Logo {
+        width: 150px;
+    }
+
+    .nav-ul.desktop-only,
+    .nav-buttons.desktop-only {
+        display: flex;
+    }
+
+    .hamburger-menu,
+    .mobile-menu {
+        display: none;
+    }
+
+    .nav-ul {
+        font-size: 16px;
+        gap: 25px;
+        flex-grow: 2;
+        margin-left: initial;
+    }
+
+    .nav-buttons {
+        gap: 8px;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .login-button,
+    .sign-button,
+    .logout-button {
+        min-width: 80px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .user-icon {
+        font-size: 18px;
+    }
+
+    .user-name {
+        font-size: 14px;
+    }
+
+    .about-crypto {
+        font-size: 40px;
+    }
+    .crpto {
+        font-size: 1rem;
+    }
+    .bitcoin {
+        width: 30px;
+        margin-left: -200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px 20px;
+    }
+
+    .Logo {
+        width: 100px;
+        margin: 0;
+    }
+
+    .nav-ul.desktop-only,
+    .nav-buttons.desktop-only {
+        display: none;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .about-crypto {
+        font-size: 32px;
+    }
+    .crpto {
+        font-size: 0.9rem;
+    }
+    .bitcoin {
+        width: 25px;
+        margin-left: -150px;
+    }
+
+    .work-section-wrapper,
+    .support-section-wrapper,
+    .pricing-section-wrapper {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 10px 15px;
+    }
+
+    .Logo {
+        width: 80px;
+    }
+
+    .hamburger-menu {
+        width: 25px;
+        height: 20px;
+    }
+
+    .hamburger-menu span {
+        height: 2px;
+    }
+
+    .hamburger-menu.open span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .hamburger-menu.open span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .mobile-menu .nav-ul li a {
+        font-size: 1.2rem;
+    }
+
+    .mobile-menu .login-button,
+    .mobile-menu .sign-button,
+    .mobile-menu .logout-button {
+        width: 150px;
+        font-size: 1rem;
+    }
+
+    .mobile-menu .user-icon {
+        font-size: 24px;
+    }
+
+    .mobile-menu .user-name {
+        font-size: 1rem;
+    }
+    
+    .about-crypto {
+        font-size: 28px;
+    }
+    .crpto {
+        font-size: 0.8rem;
+    }
+    .bitcoin {
+        width: 20px;
+        margin-left: -100px;
+    }
+}

@@ -1,0 +1,58 @@
+.support-section {
+  color: #ffffff;
+  padding: 80px 0;
+  font-family: Arial, sans-serif;
+}
+
+.support-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.support-heading h3 {
+  font-size: 20px;
+  color: #aaaaaa;
+}
+
+.support-heading h1 {
+  font-size: 32px;
+  color: #ffffff;
+}
+
+.support-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.support-card {
+  background-color: #192734;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  width: 280px;
+  transition: transform 0.3s;
+}
+
+.support-card:hover {
+  transform: translateY(-5px);
+}
+
+.support-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.support-card h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.support-card p {
+  font-size: 14px;
+  color: #cccccc;
+}

@@ -1,0 +1,30 @@
+.footer {
+  background-color: #192734;
+  color: #ffffff;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin-top: 200px;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-contact {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #90caf9;
+  transition: color 0.3s ease;
+}
+
+.footer-contact:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .footer-contact {
+    font-size: 16px;
+  }
+}

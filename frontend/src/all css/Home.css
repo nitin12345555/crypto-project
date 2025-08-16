@@ -1,0 +1,363 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    height: 80vh;
+    background-color: #050b1a;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.grid-container > div {
+    color: white;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+    animation-delay: 0.3s;
+    box-sizing: border-box;
+}
+
+.grid-container > div:nth-child(1) {
+    animation-name: slideInLeft;
+}
+
+.grid-container > div:nth-child(2) {
+    animation-name: slideInRight;
+}
+
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.Phone-Graph {
+    width: 100%;
+    max-width: 70vh;
+    height: auto;
+    margin-top: 50px;
+    mix-blend-mode: lighten;
+    opacity: 0.85;
+    filter: brightness(1.3) contrast(1.1) saturate(1.2);
+    transition: all 0.3s ease-in-out;
+}
+
+
+.crpto {
+    margin-top: -30px; 
+    margin-left: 50px; 
+    font-size: 1rem; 
+}
+
+.about-crypto {
+    list-style: none;
+    font-size: 48px; 
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-top: -10px; 
+    padding: 0;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.crypto-currency {
+    margin-left: 70px; 
+    color: lightgreen;
+    font-size: 1rem; 
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.buy,
+.Chart {
+    border-radius: 5px;
+    padding: 10px 30px;
+    min-width: 150px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid lightgreen;
+    margin-left: 40px;
+}
+
+
+.buy:hover {
+    background-color: lightgreen;
+    color: black;
+}
+
+.Chart {
+    background-color: lightgreen;
+    color: black;
+}
+
+.Chart:hover {
+    background-color: #050b1a;
+    color: lightgreen;
+}
+
+.stores {
+    margin: 40px auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.Google-store,
+.App-Store {
+    width: 150px;
+    height: auto;
+    margin: 0;
+}
+
+.buysee,
+.live {
+    font-size: 16px;
+    color: white;
+}
+
+.Google-Play {
+    height: 14px;
+    width: 14px;
+}
+
+.work-section-wrapper,
+.support-section-wrapper,
+.pricing-section-wrapper {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        padding: 30px;
+    }
+
+    .grid-container > div {
+        padding: 15px;
+        font-size: 24px;
+    }
+
+    .Phone-Graph {
+        max-width: 60vh;
+        margin-top: 30px;
+    }
+
+
+
+    .crpto {
+        margin-top: -25px; 
+        margin-left: 60px; 
+        font-size: 0.9rem; 
+    }
+
+    .about-crypto {
+        font-size: 40px; 
+        margin-top: -5px;
+    }
+
+    .crypto-currency {
+        margin-left: 120px; 
+        font-size: 0.9rem; 
+    }
+
+
+    .buy,
+    .Chart {
+        padding: 12px 25px;
+        min-width: 130px;
+        font-size: 0.9rem;
+    }
+
+    .stores {
+        margin: 30px auto;
+        gap: 15px;
+    }
+
+    .Google-store,
+    .App-Store {
+        width: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        height: auto;
+        padding: 15px;
+        margin-top: 0;
+        animation: none;
+    }
+
+    .grid-container > div {
+        padding: 15px;
+        color: white;
+        animation-name: none;
+        opacity: 1;
+        transform: none;
+        font-size: 18px; 
+    }
+
+    .grid-container > div:nth-child(1) {
+        order: 2;
+    }
+
+    .grid-container > div:nth-child(2) {
+        order: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+    }
+
+    .Phone-Graph {
+        width: 90%;
+        max-width: 280px; 
+        margin-top: -15px; 
+        display: block;
+        opacity: 1;
+        mix-blend-mode: normal;
+        filter: none;
+        margin-bottom: 15px; 
+    }
+
+   
+
+    .crpto {
+        margin-top: -15px; 
+        margin-left: 0;
+        font-size: 0.8rem; 
+        color: white;
+        text-align: center;
+    }
+
+    .about-crypto {
+        font-size: 28px; 
+        margin-top: 5px;
+        text-align: center;
+    }
+
+    .buysee,
+    .live {
+        font-size: 0.9rem; 
+        margin-left: 0;
+        margin-top: 5px;
+        color: white;
+        text-align: center;
+    }
+
+    .crypto-currency {
+        margin-left: 0;
+        text-align: center;
+        font-size: 0.9rem; 
+        color: lightgreen;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 8px; 
+        padding: 8px; 
+        width: 100%;
+        align-items: center;
+    }
+
+    .buy,
+    .Chart {
+        width: 85%; 
+        max-width: 180px; 
+        margin-left: 0;
+        font-size: 0.9rem; 
+        padding: 10px; 
+    }
+
+    .stores {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 15px auto; 
+        gap: 8px; 
+    }
+
+    .Google-store,
+    .App-Store {
+        width: 90px; 
+    }
+
+    .work-section-wrapper,
+    .support-section-wrapper,
+    .pricing-section-wrapper {
+        margin-top: 30px; 
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-crypto {
+        font-size: 24px; 
+    }
+
+    .buy,
+    .Chart {
+        width: 90%;
+        max-width: 200px; 
+    }
+
+    .stores {
+        flex-direction: column;
+        gap: 8px; 
+    }
+
+    .Google-store,
+    .App-Store {
+        width: 100px; 
+    }
+
+    .bitcoin {
+        margin-left: -100px;
+        width: 18px;
+    }
+
+    .crpto {
+        font-size: 0.75rem;
+    }
+    .Phone-Graph{
+        max-width: 250px;
+    }
+}
