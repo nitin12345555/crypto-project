@@ -3,83 +3,119 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+// Configure axios defaults
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
-axios.defaults.baseURL = BASE_URL;
-axios.defaults.withCredentials = true;
+const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  }
+});
 
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const navigate = useNavigate();
+  const [token, setToken] = useState(() => localStorage.getItem("token") || null);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
-  const [user, setUser] = useState(
-    localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user"))
-      : null
-  );
-
-  // Attach token to axios
+  // Configure axios interceptors
   useEffect(() => {
-    if (token) {
-      localStorage.setItem("token", token);
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    } else {
-      localStorage.removeItem("token");
-      delete axios.defaults.headers.common["Authorization"];
-    }
+    const requestInterceptor = axiosInstance.interceptors.request.use(
+      config => {
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      error => Promise.reject(error)
+    );
+
+    const responseInterceptor = axiosInstance.interceptors.response.use(
+      response => response,
+      error => {
+        if (error.response?.status === 401) {
+          handleLogout();
+          toast.error("Session expired. Please login again.");
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      axiosInstance.interceptors.request.eject(requestInterceptor);
+      axiosInstance.interceptors.response.eject(responseInterceptor);
+    };
   }, [token]);
 
-  // Save user in localStorage when updated
+  // Persist auth state
   useEffect(() => {
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
-    } else {
-      localStorage.removeItem("user");
-    }
-  }, [user]);
+    if (token) localStorage.setItem("token", token);
+    else localStorage.removeItem("token");
 
-  // ✅ Register
+    if (user) localStorage.setItem("user", JSON.stringify(user));
+    else localStorage.removeItem("user");
+  }, [token, user]);
+
   const register = async (name, email, password) => {
     try {
-      const { data } = await axios.post(`/api/user/register`, {
+      const { data } = await axiosInstance.post("/api/user/register", {
         name,
         email,
         password,
       });
+      
       if (data.success) {
         setToken(data.token);
         setUser(data.user);
         toast.success("Registration successful!");
         navigate("/home");
-      } else {
-        toast.error(data.message || "Registration failed");
+        return true;
       }
+      toast.error(data.message || "Registration failed");
+      return false;
     } catch (error) {
       console.error("Register Error:", error);
-      toast.error(error.response?.data?.message || "Something went wrong!");
+      const errorMsg = error.response?.data?.message || 
+                      error.message || 
+                      "Registration failed";
+      toast.error(errorMsg);
+      return false;
     }
   };
 
-  // ✅ Login
   const login = async (email, password) => {
     try {
-      const { data } = await axios.post(`/api/user/login`, { email, password });
+      const { data } = await axiosInstance.post("/api/user/login", { 
+        email, 
+        password 
+      });
+      
       if (data.success) {
         setToken(data.token);
         setUser(data.user);
         toast.success("Login successful!");
         navigate("/home");
-      } else {
-        toast.error(data.message || "Invalid credentials");
+        return true;
       }
+      toast.error(data.message || "Invalid credentials");
+      return false;
     } catch (error) {
       console.error("Login Error:", error);
-      toast.error(error.response?.data?.message || "Something went wrong!");
+      const errorMsg = error.response?.data?.message || 
+                      error.message || 
+                      "Login failed";
+      toast.error(errorMsg);
+      return false;
     }
   };
 
-  // ✅ Logout
   const logout = () => {
     setToken(null);
     setUser(null);
@@ -87,12 +123,20 @@ export const AppProvider = ({ children }) => {
     toast.success("Logged out successfully!");
   };
 
+  const value = { 
+    token, 
+    user, 
+    axiosInstance,
+    login, 
+    register, 
+    logout 
+  };
+
   return (
-    <AppContext.Provider value={{ token, user, setUser, login, register, logout }}>
+    <AppContext.Provider value={value}>
       {children}
     </AppContext.Provider>
   );
 };
 
-// Custom hook
 export const useAppContext = () => useContext(AppContext);
