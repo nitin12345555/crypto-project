@@ -21,21 +21,14 @@
       }
     },
     {
-      "src": "^/static/(.*)",
+      "src": "/static/(.*)",
       "headers": {
         "Cache-Control": "public, max-age=31536000, immutable"
       },
       "continue": true
     },
     {
-      "src": "^(?:\\/((?:assets|img|js|css|static)\\/.*|(?:favicon\\.ico|robots\\.txt|manifest\\.json))$",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      },
-      "continue": true
-    },
-    {
-      "src": "^/(.*)",
+      "src": "/(.*)",
       "dest": "/index.html",
       "headers": {
         "Cache-Control": "no-cache, no-store, must-revalidate"
