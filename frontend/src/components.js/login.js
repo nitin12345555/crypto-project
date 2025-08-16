@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
-import "../all css/login.css";
+import toast from "react-hot-toast"; // Import toast for notifications
+import "../all css/login.css"; // Corrected import path
 
 const Login = () => {
   const { login } = useAppContext();
@@ -18,7 +19,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      alert("Please enter both email and password");
+      toast.error("Please enter both email and password");
       return;
     }
 
