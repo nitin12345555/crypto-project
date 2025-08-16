@@ -1,12 +1,16 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-// Configure axios defaults
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
+// --- Context and API Setup ---
+// The correct way to handle environment variables for Vercel
+const VITE_BASE_URL = typeof process.env.VITE_BASE_URL !== "undefined"
+  ? process.env.VITE_BASE_URL
+  : "https://crypto-project-backend-gamma.vercel.app/";
+
 const axiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: VITE_BASE_URL,
   withCredentials: true,
   timeout: 10000,
   headers: {
@@ -82,9 +86,9 @@ export const AppProvider = ({ children }) => {
       return false;
     } catch (error) {
       console.error("Register Error:", error);
-      const errorMsg = error.response?.data?.message || 
-                      error.message || 
-                      "Registration failed";
+      const errorMsg = error.response?.data?.message ||
+                       error.message ||
+                       "Registration failed";
       toast.error(errorMsg);
       return false;
     }
@@ -92,9 +96,9 @@ export const AppProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const { data } = await axiosInstance.post("/api/user/login", { 
-        email, 
-        password 
+      const { data } = await axiosInstance.post("/api/user/login", {
+        email,
+        password
       });
       
       if (data.success) {
@@ -108,9 +112,9 @@ export const AppProvider = ({ children }) => {
       return false;
     } catch (error) {
       console.error("Login Error:", error);
-      const errorMsg = error.response?.data?.message || 
-                      error.message || 
-                      "Login failed";
+      const errorMsg = error.response?.data?.message ||
+                       error.message ||
+                       "Login failed";
       toast.error(errorMsg);
       return false;
     }
@@ -123,13 +127,19 @@ export const AppProvider = ({ children }) => {
     toast.success("Logged out successfully!");
   };
 
-  const value = { 
-    token, 
-    user, 
+  const handleLogout = () => {
+    setToken(null);
+    setUser(null);
+    navigate("/");
+  };
+
+  const value = {
+    token,
+    user,
     axiosInstance,
-    login, 
-    register, 
-    logout 
+    login,
+    register,
+    logout
   };
 
   return (
