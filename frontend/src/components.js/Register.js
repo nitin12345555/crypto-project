@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppContext } from "../context/AppContext"; // Corrected import path
 import toast from "react-hot-toast"; // Import toast for user notifications
-import "./Register.css"; // Corrected import path, assuming file is in the same directory as the App component
+import "../all css/Register.css" // Corrected import path, assuming file is in the same directory as the App component
 
 const Register = () => {
   const { register } = useAppContext();
