@@ -11,6 +11,7 @@ const app = express();
 connectDB();
 
 app.use(express.json());
+
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:3002",
@@ -25,14 +26,16 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRouter);
 
+// 404 Handler
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Route not found" });
 });
 
+// Error Handler
 app.use((err, req, res, next) => {
   console.error("Server Error:", err.stack);
   res.status(500).json({ success: false, message: "Server error" });
 });
 
-// ✅ Instead of app.listen
+// ✅ Export for Vercel
 export default app;
