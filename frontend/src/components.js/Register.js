@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useAppContext } from "../context/AppContext";
-import "../all css/Register.css";
+import { useAppContext } from "../context/AppContext"; // Corrected import path
+import toast from "react-hot-toast"; // Import toast for user notifications
+import "./Register.css"; // Corrected import path, assuming file is in the same directory as the App component
 
 const Register = () => {
   const { register } = useAppContext();
@@ -18,8 +19,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Replaced the alert() with a toast notification for better UX.
     if (!formData.name || !formData.email || !formData.password) {
-      alert("Please fill all fields");
+      toast.error("Please fill all fields");
       return;
     }
 
